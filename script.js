@@ -3,7 +3,7 @@
 const UNSPLASH_ACCESS_KEY = 'i15kRgVNZhGLhLf_Und6K44thf0NOLZblTI6j4LLne4';
 const API_BASE_URL = 'https://api.unsplash.com';
 
-// 获取DOM元素
+// 获取DOM
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
 const imageContainer = document.getElementById('image-container');
@@ -114,3 +114,4 @@ function hideError() {
 function clearImageContainer() {
     imageContainer.innerHTML = '';
 }
+
