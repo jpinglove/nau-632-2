@@ -1,4 +1,5 @@
-/* 基本重置和全局样式 */
+/* NAU 632-2 项目作业 */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +13,7 @@ body {
     line-height: 1.6;
 }
 
-/* 头部和搜索栏 */
+/* 顶部和搜索框风格 */
 header {
     background: #fff;
     padding: 2rem;
@@ -64,14 +65,14 @@ button[type="submit"]:hover {
     background: #0056b3;
 }
 
-/* 主内容区域 */
+/* 主显示内容区 */
 main {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* 图片容器 - 使用CSS Grid实现响应式布局 */
+/* 图片容器风格 */
 .image-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -92,10 +93,10 @@ main {
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-/* 加载动画 */
+/* 加载动画效果 */
 .loader {
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #007bff; /* Blue */
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -108,7 +109,7 @@ main {
     100% { transform: rotate(360deg); }
 }
 
-/* 错误信息 */
+/* 错误信息相关 */
 .error-message {
     text-align: center;
     color: #d9534f;
@@ -119,12 +120,11 @@ main {
     margin: 1rem 0;
 }
 
-/* 辅助类 */
 .hidden {
     display: none;
 }
 
-/* 页脚 */
+/* 页脚风格 */
 footer {
     text-align: center;
     padding: 2rem;

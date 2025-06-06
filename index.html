@@ -1,3 +1,4 @@
+<!-- NAU 632-2 项目作业 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -11,26 +12,26 @@
     <header>
         <h1>Nau-632-2-纪平作业-Unsplash 随机图片搜索</h1>
         <form id="search-form">
-            <input type="search" id="search-input" placeholder="输入关键词, 如: nature, cats..." required>
+            <input type="search" id="search-input" placeholder="输入关键词, 如: cats..." required>
             <button type="submit">搜索</button>
         </form>
     </header>
 
     <main>
-        <!-- 加载动画容器 -->
+        <!-- 一个简单的加载动画 -->
         <div id="loader" class="loader hidden"></div>
         
-        <!-- 错误信息容器 -->
+        <!-- 错误信息 -->
         <div id="error-message" class="error-message hidden"></div>
 
-        <!-- 图片展示容器 -->
+        <!-- 搜索返回的图片展示 -->
         <div id="image-container" class="image-container">
-            <!-- JavaScript将在这里动态插入图片 -->
+            <!-- 在这里动态插入图片 -->
         </div>
     </main>
 
     <footer>
-        <p>图片由 <a href="https://unsplash.com/" target="_blank">Unsplash</a> 提供</p>
+        <p>NAU 学生作业-图片源由 <a href="https://unsplash.com/" target="_blank">Unsplash</a> 提供</p>
     </footer>
 
     <script src="script.js"></script>

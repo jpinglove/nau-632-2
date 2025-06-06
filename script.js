@@ -11,7 +11,6 @@ const errorMessage = document.getElementById('error-message');
 
 // 监听表单提交事件
 searchForm.addEventListener('submit', function (event) {
-    // 阻止表单的默认提交行为（页面刷新）
     event.preventDefault();
     
     const query = searchInput.value.trim();
@@ -25,75 +24,75 @@ searchForm.addEventListener('submit', function (event) {
  * @param {string} query - 搜索的关键词
  */
 function searchImages(query) {
-    // 准备UI：显示加载动画，隐藏错误信息，清空旧图片
     showLoader();
     hideError();
     clearImageContainer();
     
     // 构建API请求URL
-    // 我们使用 /photos/random 端点，并附带 query 和 count 参数
-    // count=12 表示我们希望一次获取12张与关键词相关的随机图片
+    // 参照Unsplash API 文档描述
+    // https://unsplash.com/documentation#get-a-random-photo
+    // 使用 /photos/random 接口，并附带 query 和 count 参数
+    // count=12 表示一次获取12张与关键词相关的图片
     const apiUrl = `${API_BASE_URL}/photos/random?query=${query}&count=12&client_id=${UNSPLASH_ACCESS_KEY}`;
 
-    // 1. 创建一个新的 XMLHttpRequest 对象
+    // 创建一个新的XMLHttpRequest对象
     const xhr = new XMLHttpRequest();
 
-    // 2. 配置请求：方法(GET)、URL、是否异步(true)
+    // 使用GET方式，以及否异步方式
     xhr.open('GET', apiUrl, true);
 
-    // 3. 设置请求成功时的回调函数 (onload)
-    // onload在请求完成并成功（HTTP状态码200-299）时触发
+    // 设置一个回调函数
+    // onload在请求完成会触发
     xhr.onload = function () {
-        // 隐藏加载动画
+        // 隐藏动画
         hideLoader();
 
         if (xhr.status >= 200 && xhr.status < 300) {
-            // 请求成功，解析返回的JSON数据
+            // 如果请求成功 就解析返回的JSON格式数据
             const data = JSON.parse(xhr.responseText);
             
-            // 检查API是否返回了有效的图片数组
+            // 检查数组是否>0，>0说明有效返回。
             if (data && data.length > 0) {
                 displayImages(data);
             } else {
-                showError(`未能找到关于 "${query}" 的图片，请尝试其他关键词。`);
+                // 如果无效返回，给出提示
+                showError(`没有找到关于 "${query}" 的图片，请尝试更换关键词，谢谢使用。`);
             }
         } else {
-            // 请求失败（例如，404 Not Found, 500 Server Error）
+            // 请求失败，给出错误提示。
             showError(`请求失败。状态码: ${xhr.status} - ${xhr.statusText}`);
         }
     };
 
-    // 4. 设置请求失败时的回调函数 (onerror)
-    // onerror在发生网络层面的错误时（例如，无法连接到服务器）触发
+    // 设置一个请求失败的回调。
+    // onerror() 在在有当例如发生网络错误时触发。
     xhr.onerror = function () {
         hideLoader();
-        showError('网络错误，请检查你的网络连接。');
+        showError('网络错误，请检查网络连接。');
     };
 
-    // 5. 发送请求
     xhr.send();
 }
 
 /**
- * 将获取到的图片数据显示在页面上
- * @param {Array} images - 包含图片信息的数组
+ * 将获取到的图片显示在页面上
+ * @param {Array} images - 一个图片的数组
  */
 function displayImages(images) {
     images.forEach(image => {
         // 为每张图片创建一个img元素
         const imgElement = document.createElement('img');
         
-        // 设置图片的URL和替代文本（用于SEO和可访问性）
-        imgElement.src = image.urls.regular; // 使用regular尺寸的图片
-        imgElement.alt = image.alt_description || 'Unsplash Image';
+        // 设置图片的信息
+        imgElement.src = image.urls.regular; // 返回字段中的regular尺寸的图片显示较为适合，还有raw,full,small,thumb等URL字段。
+        imgElement.alt = image.alt_description || 'Unsplash Image Description'; // 用返回字段里的alt_description给图片添加描述，如果没有，就显示默认的。
         
-        // 将创建的img元素添加到图片容器中
+        // 将创建的img元素添加到图片容器中，以让页面显示出图片
         imageContainer.appendChild(imgElement);
     });
 }
 
-// --- 辅助函数 ---
-
+// 其它的一些辅助函数
 function showLoader() {
     loader.classList.remove('hidden');
 }
