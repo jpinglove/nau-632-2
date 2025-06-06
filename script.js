@@ -1,4 +1,5 @@
-// 替换成你自己的 Unsplash Access Key
+// NAU 632-2 项目作业
+// Unsplash 分配给我的 Access Key
 const UNSPLASH_ACCESS_KEY = 'i15kRgVNZhGLhLf_Und6K44thf0NOLZblTI6j4LLne4';
 const API_BASE_URL = 'https://api.unsplash.com';
 
